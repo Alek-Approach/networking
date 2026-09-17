@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 10 — Networking and Professional Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --tint:#f1f4f3;
+    --ink:#191b1a;
+    --ink-soft:#55605b;
+    --rule:#c7cfcb;
+    --rule-soft:#e3e8e6;
+    --rise:#1b5fa8;
+    --fall:#a32f3c;
+    --box:#ffffff;
+    --fill:#fbfdfc;
+    --focus:#1b5fa8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#15181a; --tint:#1e2326; --ink:#e9ece9; --ink-soft:#a3aeaa;
+      --rule:#49524f; --rule-soft:#2a3134; --rise:#79b4ec; --fall:#f0919c;
+      --box:#191d20; --fill:#1b2023; --focus:#79b4ec;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15181a; --tint:#1e2326; --ink:#e9ece9; --ink-soft:#a3aeaa;
+    --rule:#49524f; --rule-soft:#2a3134; --rise:#79b4ec; --fall:#f0919c;
+    --box:#191d20; --fill:#1b2023; --focus:#79b4ec;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Literata",Georgia,"Times New Roman",serif;
+    font-size:17px; line-height:1.55;
+  }
+  .sheet{max-width:53rem;margin:0 auto;padding:2.5rem 1.25rem 8rem}
+
+  /* ---------- masthead ---------- */
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:1.1rem}
+  .unit{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.85rem;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 .35rem}
+  h1{font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;font-size:clamp(1.7rem,4.4vw,2.5rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 .7rem}
+  .goals{list-style:none;margin:0;padding:0;display:grid;gap:.3rem;max-width:40rem}
+  .goals li{display:flex;gap:.55rem;align-items:flex-start;font-size:.98rem;color:var(--ink-soft)}
+
+  .nameline{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-top:1.1rem;font-family:"Instrument Sans",system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)}
+  .nameline input{flex:1 1 12rem;min-width:9rem}
+
+  /* ---------- form controls ---------- */
+  input[type=text],textarea{
+    font-family:"Literata",Georgia,serif;font-size:1rem;color:var(--ink);
+    background:var(--fill);border:1px solid var(--rule-soft);border-radius:2px;
+    padding:.45rem .6rem;width:100%;line-height:1.7;
+  }
+  textarea{resize:none;overflow:hidden;display:block;min-height:2.9rem}
+  input[type=text]:focus,textarea:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:var(--focus)}
+  ::placeholder{color:var(--ink-soft);opacity:.55;font-style:italic}
+
+  input[type=checkbox]{
+    appearance:none;-webkit-appearance:none;flex:0 0 auto;
+    width:1.05rem;height:1.05rem;margin:.28rem 0 0;border:1.5px solid var(--rule);
+    border-radius:2px;background:var(--fill);cursor:pointer;position:relative
+  }
+  input[type=checkbox]:checked::after{
+    content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:.95rem;font-weight:700;color:var(--rise)
+  }
+  input[type=checkbox]:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+  .choice{display:inline-flex;gap:.9rem;flex-wrap:wrap;margin:.2rem 0}
+  .choice label{
+    display:inline-flex;gap:.4rem;align-items:center;cursor:pointer;
+    border:1px solid var(--rule);border-radius:99px;padding:.15rem .75rem;font-size:.95rem
+  }
+  .choice input{appearance:none;-webkit-appearance:none;width:.8rem;height:.8rem;border:1.5px solid var(--rule);border-radius:50%;background:var(--fill);cursor:pointer}
+  .choice input:checked{background:var(--focus);border-color:var(--focus)}
+  .choice label:has(input:checked){border-color:var(--focus);background:var(--tint)}
+  .choice input:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+  /* ---------- sections ---------- */
+  section{margin-top:2.6rem}
+  .head{display:flex;gap:.85rem;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:.4rem;margin-bottom:.9rem}
+  .num{font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;font-size:1.05rem;flex:0 0 auto;color:var(--ink-soft)}
+  h2.title{font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;font-size:1.22rem;letter-spacing:-.01em;margin:0;flex:1 1 auto}
+  .meta{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);flex:0 0 auto;white-space:nowrap}
+  .lead{margin:0 0 1rem;max-width:44rem}
+
+  /* ---------- key ---------- */
+  .key{margin:1.4rem 0 0;border:1.5px solid var(--ink);background:var(--box);padding:1rem 1.1rem}
+  .key h2{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.95rem;font-weight:600;margin:0 0 .7rem}
+  .key dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.55rem 1.5rem;margin:0}
+  .key div{display:flex;gap:.7rem;align-items:baseline}
+  .key dt{flex:0 0 3.4rem;font-family:"DM Mono",ui-monospace,monospace;font-size:1.05rem}
+  .key dd{margin:0;font-size:.92rem;color:var(--ink-soft)}
+  .up{color:var(--rise);font-weight:600}
+  .down{color:var(--fall);font-weight:600}
+  .pause{color:var(--ink-soft);font-weight:600}
+
+  /* ---------- transcript + marking ---------- */
+  .script{margin:1rem 0;border-left:3px solid var(--rule);padding-left:1rem}
+  .line{display:grid;grid-template-columns:5.6rem 1fr;gap:.6rem;margin-bottom:.5rem;align-items:baseline}
+  .who{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.88rem;font-weight:500;color:var(--ink-soft)}
+  .say{margin:0}
+  .stage{font-style:italic;color:var(--ink-soft)}
+  .w{cursor:pointer;border-radius:2px;padding:0 .04em}
+  .w:hover{background:var(--tint)}
+  .w.on{text-transform:uppercase;font-weight:600;letter-spacing:.01em}
+  .gap{display:inline-block;width:.45em;cursor:pointer;position:relative;text-align:center;padding:.12em 0}
+  .gap::after{content:"/";color:var(--ink-soft);opacity:0;font-weight:600}
+  .gap:hover::after{opacity:.35}
+  .gap.on{width:.85em}
+  .gap.on::after{opacity:1;color:var(--ink)}
+  .slash{color:var(--ink-soft);font-weight:600;padding:0 .15em}
+  .arrows{display:inline-flex;gap:.15rem;margin-left:.35rem;vertical-align:baseline}
+  .arrows button{
+    font:inherit;font-size:1rem;line-height:1;border:1px solid transparent;background:none;
+    color:var(--ink-soft);opacity:.3;cursor:pointer;border-radius:3px;padding:.05rem .2rem
+  }
+  .arrows button:hover{opacity:.7;background:var(--tint)}
+  .arrows button.on{opacity:1;border-color:var(--rule)}
+  .arrows button[data-v="up"].on{color:var(--rise)}
+  .arrows button[data-v="down"].on{color:var(--fall)}
+  .arrows button:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+  .howto{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);margin:.5rem 0 0}
+
+  /* ---------- questions ---------- */
+  ol.qs{margin:0;padding:0;list-style:none;counter-reset:q}
+  ol.qs > li{counter-increment:q;margin-bottom:1.5rem}
+  ol.qs > li > .q{display:grid;grid-template-columns:1.6rem 1fr;gap:.3rem;align-items:baseline}
+  ol.qs > li > .q::before{content:counter(q) ".";font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;color:var(--ink-soft);font-size:.95rem}
+  .sub{margin:.45rem 0 0 1.6rem;color:var(--ink-soft);font-size:.95rem}
+  .sub p{margin:.3rem 0}
+  .field{margin:.6rem 0 0 1.6rem}
+  .field.full{margin-left:0}
+
+  /* ---------- boxes ---------- */
+  .box{background:var(--tint);border:1px solid var(--rule-soft);padding:1.05rem 1.15rem;margin:1.1rem 0}
+  .box h3{font-family:"Instrument Sans",system-ui,sans-serif;font-size:1rem;font-weight:600;margin:0 0 .55rem}
+  .box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+  .box ul,.box ol{margin:.4rem 0;padding-left:1.15rem}
+  .box li{margin-bottom:.3rem}
+  .warn{background:var(--box);border:1.5px dashed var(--rule)}
+
+  /* ---------- table ---------- */
+  table.ex{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.97rem}
+  table.ex caption{text-align:left;font-family:"Instrument Sans",system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);padding-bottom:.4rem}
+  table.ex th{text-align:left;font-family:"Instrument Sans",system-ui,sans-serif;font-size:.85rem;font-weight:600;color:var(--ink-soft);border-bottom:1.5px solid var(--rule);padding:.35rem .6rem .35rem 0}
+  table.ex td{border-bottom:1px solid var(--rule-soft);padding:.55rem .6rem .55rem 0;vertical-align:top}
+  table.ex td:first-child{width:52%}
+  .tablewrap{overflow-x:auto}
+
+  /* ---------- drill ---------- */
+  .drill{list-style:none;margin:.8rem 0 0;padding:0}
+  .drill li{margin-bottom:.85rem}
+  .drill .src{font-size:1rem;margin:0 0 .25rem}
+  .drill .model-line{font-family:"DM Mono",ui-monospace,monospace;color:var(--ink-soft);font-size:.95rem}
+  .tag{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.75rem;border:1px solid var(--rule);padding:.05rem .4rem;margin-left:.5rem;white-space:nowrap;color:var(--ink-soft)}
+  .drill input[type=text]{font-family:"DM Mono",ui-monospace,monospace;font-size:.95rem}
+
+  /* ---------- notes grid ---------- */
+  table.grid{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.92rem}
+  table.grid th{border:1px solid var(--rule);padding:.5rem .55rem;background:var(--tint);text-align:left;font-family:"Instrument Sans",system-ui,sans-serif;font-size:.85rem}
+  table.grid td{border:1px solid var(--rule);padding:0}
+  table.grid input{border:none;border-radius:0;background:transparent;padding:.55rem;font-size:.92rem}
+  table.grid input:focus{outline-offset:-2px}
+
+  .phrasebank{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+  .phrasebank h4{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.9rem;font-weight:600;margin:0 0 .35rem}
+  .phrasebank ul{list-style:none;margin:0;padding:0}
+  .phrasebank li{margin-bottom:.32rem;font-size:.95rem;line-height:1.4}
+
+  .checklist{list-style:none;margin:.5rem 0 0;padding:0}
+  .checklist li{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.5rem}
+
+  .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:.4rem 1.5rem}
+  .glossary div{font-size:.94rem}
+  .glossary span{color:var(--ink-soft)}
+
+  /* ---------- toolbar ---------- */
+  .toolbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    background:var(--paper);border-top:1.5px solid var(--rule);
+    display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;
+    padding:.6rem max(1.25rem,calc(50vw - 26.5rem));
+    font-family:"Instrument Sans",system-ui,sans-serif;font-size:.85rem
+  }
+  .toolbar .ins{font-family:"DM Mono",ui-monospace,monospace;font-size:1rem;min-width:2.2rem}
+  .toolbar button{
+    font:inherit;background:var(--box);color:var(--ink);border:1px solid var(--rule);
+    border-radius:3px;padding:.35rem .7rem;cursor:pointer
+  }
+  .toolbar button:hover{background:var(--tint)}
+  .toolbar button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+  .toolbar .sep{flex:1 1 auto}
+  .status{color:var(--ink-soft);white-space:nowrap}
+  .toolbar .danger:hover{border-color:var(--fall);color:var(--fall)}
+
+  .saveinfo{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin-top:.6rem}
+
+  hr.foot{border:0;border-top:1px solid var(--rule);margin:3rem 0 1rem}
+  .foot-note{font-family:"Instrument Sans",system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft)}
+
+  @media (max-width:540px){
+    body{font-size:16px}
+    .line{grid-template-columns:1fr;gap:0}
+    .head{flex-wrap:wrap}
+    .toolbar{padding:.55rem .75rem}
+    .toolbar button{padding:.3rem .55rem}
+  }
+
+  @media print{
+    :root{--paper:#fff;--ink:#000;--ink-soft:#444;--tint:#f4f6f5;--box:#fff;--fill:#fff;--rule:#999;--rule-soft:#bbb}
+    @page{margin:14mm}
+    body{font-size:11pt}
+    .sheet{padding:0;max-width:none}
+    .toolbar,.howto,.arrows button:not(.on){display:none}
+    section,.box,table,.script,ol.qs > li{page-break-inside:avoid}
+    input[type=text],textarea{border:1px solid #bbb;background:#fff}
+    .arrows button.on{opacity:1;border:none;color:#000}
+    a{text-decoration:none;color:inherit}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="masthead">
+  <p class="unit">Unit 10 · Basic · Listening, Speaking &amp; Pronunciation</p>
+  <h1>Networking and Professional Events</h1>
+  <ul class="goals">
+    <li><input type="checkbox" class="ans" data-label="Goal: sound interested"><span>Sound genuinely interested when you make small talk</span></li>
+    <li><input type="checkbox" class="ans" data-label="Goal: ask about work"><span>Ask about someone's work in a natural way</span></li>
+    <li><input type="checkbox" class="ans" data-label="Goal: close politely"><span>End a conversation politely, and stay in touch</span></li>
+  </ul>
+  <div class="nameline">
+    <label for="sname">Name</label>
+    <input id="sname" type="text" class="ans" data-label="Name" placeholder="Your name">
+    <label for="sdate">Date</label>
+    <input id="sdate" type="text" class="ans" data-label="Date" placeholder="Today's date" style="flex:0 1 9rem">
+  </div>
+</header>
+
+<div class="key">
+  <h2>How we mark speech in this unit</h2>
+  <dl>
+    <div><dt>CAPS</dt><dd>the stressed syllable — <em>comMITment</em></dd></div>
+    <div><dt class="pause">/</dt><dd>a short pause between thought groups</dd></div>
+    <div><dt class="up">↗</dt><dd>your voice goes up at the end</dd></div>
+    <div><dt class="down">↘</dt><dd>your voice goes down at the end</dd></div>
+  </dl>
+</div>
+
+<!-- 1 -->
+<section>
+  <div class="head"><span class="num">1</span><h2 class="title">Listen in</h2><span class="meta">5 min · pens down</span></div>
+  <p class="lead">Your teacher reads the conversation aloud. Just listen and follow along. Don't mark anything yet — listen for the <strong>meaning</strong>. Who are these two people? What do they want?</p>
+
+  <div class="script" id="script1"></div>
+  <p class="howto">Marking tools: click a <strong>word</strong> to mark stress · click the small <strong>space</strong> between words to add a pause <span class="pause">/</span> · click <span class="up">↗</span> or <span class="down">↘</span> at the end of a line to mark intonation. Click again to remove.</p>
+
+  <div class="box">
+    <h3>Quick meaning check</h3>
+    <p style="margin-top:0">Answer in a few words. Compare with a partner.</p>
+    <ol class="qs" style="margin-top:.6rem">
+      <li><div class="q"><span>What work is Marco doing now, and what work does he want to return to?</span></div>
+        <div class="field"><input type="text" class="ans" data-label="1.1 Marco's work now / goal"></div></li>
+      <li><div class="q"><span>What do Amara and Marco have in common?</span></div>
+        <div class="field"><input type="text" class="ans" data-label="1.2 What they have in common"></div></li>
+      <li><div class="q"><span>Who asks to stay in touch — and how do they ask?</span></div>
+        <div class="field"><input type="text" class="ans" data-label="1.3 Who asks to stay in touch"></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="head"><span class="num">2</span><h2 class="title">Notice it</h2><span class="meta">10 min · pens up</span></div>
+  <p class="lead">Your teacher reads the conversation a second time. Now think about <strong>how</strong> it sounds. Go back up to the conversation and mark the stress, the pauses and the intonation. Then answer the questions.</p>
+
+  <ol class="qs">
+    <li>
+      <div class="q"><span>Amara says <strong>“That takes real commitment.”</strong> She is showing respect for Marco's effort.</span></div>
+      <div class="sub">
+        <p>Which intonation do you hear?</p>
+        <div class="choice">
+          <label><input type="radio" name="q2rise" value="rising" class="ans" data-label="2.1 Intonation heard"> rising <span class="up">↗</span></label>
+          <label><input type="radio" name="q2rise" value="falling" class="ans" data-label="2.1 Intonation heard"> falling <span class="down">↘</span></label>
+        </div>
+        <p>Now say it the other way. What changes? Does it still sound like a compliment?</p>
+      </div>
+      <div class="field"><textarea class="ans" rows="2" data-label="2.1 What changes with the other intonation"></textarea></div>
+    </li>
+    <li>
+      <div class="q"><span>Marco says <strong>“Everything here is a process.”</strong> He is not only talking about himself — he is talking about a shared experience.</span></div>
+      <div class="sub">
+        <p>Why does this sentence bring the two speakers closer together? Does his voice rise <span class="up">↗</span> or fall <span class="down">↘</span>, and why?</p>
+      </div>
+      <div class="field"><textarea class="ans" rows="2" data-label="2.2 Why 'Everything here is a process' works"></textarea></div>
+    </li>
+    <li>
+      <div class="q"><span>Amara closes with <strong>“I'd love to connect on LinkedIn. Would that be okay? <span class="up">↗</span>”</strong> The rise makes the request softer.</span></div>
+      <div class="sub">
+        <p>Compare it with: <em>“Let's connect on LinkedIn. <span class="down">↘</span>”</em></p>
+        <p>How does each one feel to the listener? When might the second one be fine?</p>
+      </div>
+      <div class="field"><textarea class="ans" rows="2" data-label="2.3 Comparing the two requests"></textarea></div>
+    </li>
+  </ol>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="head"><span class="num">3</span><h2 class="title">Pronunciation focus: real interest vs. polite performance</h2><span class="meta">10 min</span></div>
+  <p class="lead"><strong>Prosody</strong> is the music of your voice: stress, rhythm, pauses and pitch. Small talk works when your prosody says <em>I am actually interested in you</em> — not just <em>I am being polite</em>. In English, three things change when interest is real:</p>
+
+  <div class="box">
+    <ol>
+      <li>The question <strong>rises higher</strong> at the end. <span class="up">↗</span></li>
+      <li>Short responses come <strong>quickly</strong>: “That's interesting.” “Really?” “Oh, wow.”</li>
+      <li>The voice gets a little <strong>softer and slower</strong> — closer, not louder.</li>
+    </ol>
+    <p>The difference is small. But people feel it immediately.</p>
+  </div>
+
+  <div class="tablewrap">
+    <table class="ex">
+      <caption>Examples from the conversation — listen, then say them yourself.</caption>
+      <thead><tr><th scope="col">Marked example</th><th scope="col">What to notice</th></tr></thead>
+      <tbody>
+        <tr><td>How long does requalification take? <span class="up">↗</span></td><td>The rise says the question is real, not automatic.</td></tr>
+        <tr><td>That takes real commitment. <span class="down">↘</span></td><td>Falling. It's a statement that lands — not a question.</td></tr>
+        <tr><td>I'd love to connect on LinkedIn. <span class="pause">/</span> Would that be okay? <span class="up">↗</span></td><td>Statement falls, then the check rises and softens the request.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box warn">
+    <h3>Two things to watch</h3>
+    <ul>
+      <li><strong>Flat voice.</strong> If your pitch never moves, a friendly question can sound bored or even rude.</li>
+      <li><strong>Everything rising.</strong> If every sentence goes up <span class="up">↗</span>, you sound unsure of yourself. Statements fall <span class="down">↘</span>. Questions and soft requests rise <span class="up">↗</span>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="head"><span class="num">4</span><h2 class="title">Say it</h2><span class="meta">8 min · pairs</span></div>
+  <p class="lead">Type each line again in the box, with the stressed syllables in CAPITALS and <span class="pause">/</span> where you pause. The first one is done for you. Then say your version to your partner.</p>
+
+  <ul class="drill">
+    <li>
+      <p class="src">Nice to meet you. What brings you here? <span class="up">↗</span><span class="tag">example</span></p>
+      <p class="model-line">NICE to MEET you. / What BRINGS you HERE? ↗</p>
+    </li>
+    <li>
+      <p class="src">That's interesting. How long have you been in that field? <span class="up">↗</span></p>
+      <input type="text" class="ans" data-label="4.1 Marked line" placeholder="Type your marked version here…">
+    </li>
+    <li>
+      <p class="src">That takes real commitment. <span class="down">↘</span></p>
+      <input type="text" class="ans" data-label="4.2 Marked line" placeholder="Type your marked version here…">
+    </li>
+    <li>
+      <p class="src">Everything here is a process. <span class="down">↘</span></p>
+      <input type="text" class="ans" data-label="4.3 Marked line" placeholder="Type your marked version here…">
+    </li>
+    <li>
+      <p class="src">I'd love to stay in touch. Would that be okay? <span class="up">↗</span></p>
+      <input type="text" class="ans" data-label="4.4 Marked line" placeholder="Type your marked version here…">
+    </li>
+  </ul>
+
+  <div class="box">
+    <h3>Partner game: believe me or not</h3>
+    <p style="margin-top:0">Say each line <strong>twice</strong> — once sounding bored, once sounding genuinely interested. Don't tell your partner which is which. Your partner says: <em>“I believe you”</em> or <em>“I don't believe you.”</em> Then swap roles.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="head"><span class="num">5</span><h2 class="title">Speaking task A: networking event</h2><span class="meta">15 min · stand up</span></div>
+  <p class="lead">Introduce yourself to <strong>three people you have not spoken to today</strong>. With each person, learn one real thing and share one real thing. Fill in the table after each conversation, not during it.</p>
+
+  <div class="box">
+    <h3>Pocket phrases</h3>
+    <div class="phrasebank">
+      <div><h4>Open</h4><ul>
+        <li>Hi — I don't think we've met. I'm ___.</li>
+        <li>Are you here with ___?</li>
+        <li>What brings you here? <span class="up">↗</span></li></ul></div>
+      <div><h4>Ask about their work</h4><ul>
+        <li>What field are you in? <span class="up">↗</span></li>
+        <li>How long have you been doing that? <span class="up">↗</span></li>
+        <li>What's the hardest part? <span class="up">↗</span></li></ul></div>
+      <div><h4>Show interest</h4><ul>
+        <li>That's interesting. <span class="down">↘</span></li>
+        <li>Really? <span class="up">↗</span></li>
+        <li>That takes real commitment. <span class="down">↘</span></li>
+        <li>Everything here is a process. <span class="down">↘</span></li></ul></div>
+      <div><h4>Close politely</h4><ul>
+        <li>It was really good to meet you. <span class="down">↘</span></li>
+        <li>I won't keep you — enjoy the rest of the event.</li>
+        <li>I hope the exam goes well. <span class="down">↘</span></li>
+        <li>I'd love to stay in touch. Would that be okay? <span class="up">↗</span></li></ul></div>
+    </div>
+  </div>
+
+  <table class="grid">
+    <thead><tr><th scope="col">Name</th><th scope="col">Field</th><th scope="col">One thing I learned</th><th scope="col">Something we share</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><input type="text" class="ans" data-label="5 Person 1 – name"></td>
+        <td><input type="text" class="ans" data-label="5 Person 1 – field"></td>
+        <td><input type="text" class="ans" data-label="5 Person 1 – learned"></td>
+        <td><input type="text" class="ans" data-label="5 Person 1 – shared"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="ans" data-label="5 Person 2 – name"></td>
+        <td><input type="text" class="ans" data-label="5 Person 2 – field"></td>
+        <td><input type="text" class="ans" data-label="5 Person 2 – learned"></td>
+        <td><input type="text" class="ans" data-label="5 Person 2 – shared"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="ans" data-label="5 Person 3 – name"></td>
+        <td><input type="text" class="ans" data-label="5 Person 3 – field"></td>
+        <td><input type="text" class="ans" data-label="5 Person 3 – learned"></td>
+        <td><input type="text" class="ans" data-label="5 Person 3 – shared"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="lead" style="margin-top:1rem"><strong>Afterwards:</strong> tell the class one thing you learned about someone — something you did not know before today.</p>
+</section>
+
+<!-- 6 -->
+<section>
+  <div class="head"><span class="num">6</span><h2 class="title">Speaking task B: a connection that mattered</h2><span class="meta">2 min think · 3 min each</span></div>
+  <p class="lead">Tell your partner about a professional or personal connection you made in America that was unexpected or important.</p>
+
+  <div class="box">
+    <ul>
+      <li>Who did you meet, and where?</li>
+      <li>What did you talk about?</li>
+      <li>What made the connection work — what did they say, or what did you say?</li>
+      <li>Has it led anywhere? Or is it important for another reason?</li>
+    </ul>
+  </div>
+
+  <div class="box warn">
+    <h3>Listener, you have a job too</h3>
+    <ul>
+      <li>Ask at least two follow-up questions. Start one with <em>“How long…”</em> and one with <em>“What made…”</em></li>
+      <li>Use a short response at the right moment: <em>“Really?”</em> <em>“That's interesting.”</em> <em>“That takes commitment.”</em></li>
+      <li>Watch your partner's face. Did your question sound interested, or automatic?</li>
+    </ul>
+  </div>
+
+  <p class="lead" style="margin-top:1.4rem">After you speak, write 1–2 sentences about what you said:</p>
+  <div class="field full"><textarea class="ans" rows="3" data-label="6 What I said about my connection"></textarea></div>
+
+  <p class="lead" style="margin-top:1.2rem">Now write your own opening line for a networking conversation — the way you would really say it. Mark the stress and the intonation.</p>
+  <div class="field full"><input type="text" class="ans" data-label="6 My opening line (marked)" placeholder="e.g. HI — I don't think we've MET. / I'm ___. ↗"></div>
+</section>
+
+<!-- 7 -->
+<section>
+  <div class="head"><span class="num">7</span><h2 class="title">Listen and respond</h2><span class="meta">10 min</span></div>
+  <p class="lead">Your teacher reads this welcome speech. Take notes while you listen — key words only, not full sentences. Then answer in full sentences. The pauses <span class="pause">/</span> are already marked; you can click the words to mark stress.</p>
+
+  <div class="script" id="script2"></div>
+
+  <p class="lead" style="margin-top:1.2rem"><strong>My notes</strong></p>
+  <div class="field full"><textarea class="ans" rows="4" data-label="7 Notes while listening"></textarea></div>
+
+  <ol class="qs" style="margin-top:1.6rem">
+    <li>
+      <div class="q"><span>What does the host say about the forty-five minutes before the formal session? Why does he think that?</span></div>
+      <div class="field"><textarea class="ans" rows="2" data-label="7.1 The forty-five minutes"></textarea></div>
+    </li>
+    <li>
+      <div class="q"><span>Look at: <strong>“That is not a deficit. <span class="pause">/</span> That is a superpower.”</strong></span></div>
+      <div class="sub">
+        <p>a. What does <em>that</em> refer to?</p>
+        <p>b. The two sentences have the same shape. What does the repetition do to the listener?</p>
+        <p>c. Which two words does the host stress most? Mark them in the speech above.</p>
+      </div>
+      <div class="field"><textarea class="ans" rows="3" data-label="7.2 Deficit / superpower"></textarea></div>
+    </li>
+    <li>
+      <div class="q"><span>Write one question you would ask someone at this event, based on what the host said. Mark the intonation.</span></div>
+      <div class="field"><input type="text" class="ans" data-label="7.3 My question for the event"></div>
+    </li>
+  </ol>
+
+  <div class="box">
+    <h3>Words from this unit</h3>
+    <div class="glossary">
+      <div><b>requalify</b> <span>— to take exams again so you can do your profession in a new country</span></div>
+      <div><b>certification</b> <span>— official proof that you are qualified</span></div>
+      <div><b>a deficit</b> <span>— something missing; a weakness</span></div>
+      <div><b>a mentor</b> <span>— an experienced person who guides you</span></div>
+      <div><b>to stay in touch</b> <span>— to keep contact after you meet</span></div>
+      <div><b>“It's a process.”</b> <span>— it's long and complicated (said with patience, often humour)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section>
+  <div class="head"><span class="num">8</span><h2 class="title">Before you go</h2><span class="meta">3 min</span></div>
+  <p class="lead">Tick what you can do now.</p>
+  <ul class="checklist">
+    <li><input type="checkbox" class="ans" data-label="8 Can start a conversation"><span>I can start a conversation with someone I have never met.</span></li>
+    <li><input type="checkbox" class="ans" data-label="8 Can ask about work"><span>I can ask about someone's work and sound genuinely interested.</span></li>
+    <li><input type="checkbox" class="ans" data-label="8 Can close politely"><span>I can end a conversation politely and ask to stay in touch.</span></li>
+  </ul>
+  <p class="lead" style="margin-top:1.2rem">One phrase from this unit I will use this week:</p>
+  <div class="field full"><input type="text" class="ans" data-label="8 Phrase I will use"></div>
+  <p class="saveinfo" id="saveinfo">Your answers stay in this browser on this device. To hand them in, use <strong>Download answers</strong> or <strong>Print</strong> at the bottom of the page.</p>
+</section>
+
+<hr class="foot">
+<p class="foot-note">Unit 10 · Networking and Professional Events · Student worksheet</p>
+
+</div>
+
+<div class="toolbar" role="toolbar" aria-label="Worksheet tools">
+  <span class="status">Insert:</span>
+  <button type="button" class="ins" data-sym="↗" title="Insert rising arrow">↗</button>
+  <button type="button" class="ins" data-sym="↘" title="Insert falling arrow">↘</button>
+  <button type="button" class="ins" data-sym="/" title="Insert pause mark">/</button>
+  <span class="sep"></span>
+  <span class="status" id="status" aria-live="polite"></span>
+  <button type="button" id="btn-download">Download answers</button>
+  <button type="button" id="btn-print">Print</button>
+  <button type="button" id="btn-reset" class="danger">Clear all</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var SCRIPT1 = [
+    ["Amara","Hi — I don't think we've met. I'm Amara Diallo."],
+    ["Marco","Marco Reyes. Nice to meet you. Are you with the healthcare panel?"],
+    ["Amara","No — I'm here through MassHire. I work in pharmacy. You?"],
+    ["Marco","Engineering. Civil. Though right now I'm in construction while I requalify."],
+    ["Amara","That's interesting. How long does requalification take?"],
+    ["Marco","About two years for the full exam. I'm a year in."],
+    ["Amara","That takes real commitment. I'm doing something similar — US certification."],
+    ["Marco","Which field?"],
+    ["Amara","Pharmacy. PharmD equivalent. It's… a process."],
+    ["Marco","(laughs) Everything here is a process."],
+    ["Amara","Exactly. Look — I'd love to connect on LinkedIn. Would that be okay?"],
+    ["Marco","Absolutely. Here's my card."],
+    ["Amara","Great. It was really good to meet you. I hope the requalification goes well."],
+    ["Marco","You too. Good luck with the certification."],
+    ["Amara","Thank you."]
+  ];
+
+  var SCRIPT2 = [
+    ["Host","Welcome, everyone. We have about forty-five minutes before the formal session begins."],
+    ["Host","I always think this is actually the most important part of any professional event."],
+    ["Host","The people in this room represent more than thirty countries. / More than twenty professional fields."],
+    ["Host","And many of you have had to rebuild your career — / your professional identity — / in a new language."],
+    ["Host","That is not a deficit. / That is a superpower."],
+    ["Host","So — / please introduce yourselves. / Be curious. / Ask real questions."],
+    ["Host","The person next to you may be your next colleague, / your next mentor, / or the person who tells you about the opportunity / you didn't know existed."],
+    ["Host","Enjoy the time."]
+  ];
+
+  var KEY = "unit10-worksheet-v1";
+  var state = { fields:{}, words:{}, gaps:{}, arrows:{} };
+
+  /* ---------- load saved state ---------- */
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){
+      var parsed = JSON.parse(raw);
+      if(parsed && typeof parsed === "object"){
+        state.fields = parsed.fields || {};
+        state.words  = parsed.words  || {};
+        state.gaps   = parsed.gaps   || {};
+        state.arrows = parsed.arrows || {};
+      }
+    }
+  }catch(e){ /* storage unavailable or corrupt — carry on with an empty sheet */ }
+
+  var saveTimer = null;
+  var statusEl = document.getElementById("status");
+  function flash(msg){
+    if(!statusEl) return;
+    statusEl.textContent = msg;
+    clearTimeout(flash._t);
+    flash._t = setTimeout(function(){ statusEl.textContent = ""; }, 1600);
+  }
+  function save(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      try{
+        localStorage.setItem(KEY, JSON.stringify(state));
+        flash("Saved");
+      }catch(e){
+        flash("Could not save in this browser");
+      }
+    }, 350);
+  }
+
+  /* ---------- build the marked-up scripts ---------- */
+  function buildScript(containerId, data, prefix, clickableArrows){
+    var box = document.getElementById(containerId);
+    if(!box) return;
+    data.forEach(function(row, li){
+      var line = document.createElement("div");
+      line.className = "line";
+
+      var who = document.createElement("span");
+      who.className = "who";
+      who.textContent = row[0];
+      line.appendChild(who);
+
+      var say = document.createElement("p");
+      say.className = "say";
+
+      var tokens = row[1].split(/\s+/);
+      tokens.forEach(function(tok, wi){
+        if(wi > 0){
+          var gap = document.createElement("span");
+          gap.className = "gap";
+          var gk = prefix + ":" + li + ":" + wi;
+          gap.dataset.k = gk;
+          if(state.gaps[gk]) gap.classList.add("on");
+          gap.setAttribute("role","button");
+          gap.setAttribute("aria-label","Add a pause here");
+          say.appendChild(gap);
+        }
+        if(tok === "/"){
+          var sl = document.createElement("span");
+          sl.className = "slash";
+          sl.textContent = "/";
+          say.appendChild(sl);
+          return;
+        }
+        var w = document.createElement("span");
+        var isStage = /^\(.*\)$/.test(tok);
+        w.className = isStage ? "stage" : "w";
+        var wk = prefix + ":" + li + ":" + wi;
+        if(!isStage){
+          w.dataset.k = wk;
+          if(state.words[wk]) w.classList.add("on");
+          w.setAttribute("role","button");
+          w.setAttribute("aria-label","Mark stress on " + tok);
+        }
+        w.textContent = tok;
+        say.appendChild(w);
+      });
+
+      if(clickableArrows){
+        var ar = document.createElement("span");
+        ar.className = "arrows";
+        ["up","down"].forEach(function(v){
+          var b = document.createElement("button");
+          b.type = "button";
+          b.dataset.v = v;
+          b.dataset.k = prefix + ":" + li;
+          b.textContent = (v === "up" ? "↗" : "↘");
+          b.title = (v === "up" ? "Rising intonation" : "Falling intonation");
+          if(state.arrows[prefix + ":" + li] === v) b.classList.add("on");
+          ar.appendChild(b);
+        });
+        say.appendChild(ar);
+      }
+
+      line.appendChild(say);
+      box.appendChild(line);
+    });
+  }
+
+  buildScript("script1", SCRIPT1, "a", true);
+  buildScript("script2", SCRIPT2, "b", true);
+
+  /* ---------- marking clicks ---------- */
+  document.addEventListener("click", function(ev){
+    var t = ev.target;
+    if(t.classList && t.classList.contains("w")){
+      var k = t.dataset.k;
+      if(state.words[k]){ delete state.words[k]; t.classList.remove("on"); }
+      else { state.words[k] = 1; t.classList.add("on"); }
+      save();
+    } else if(t.classList && t.classList.contains("gap")){
+      var g = t.dataset.k;
+      if(state.gaps[g]){ delete state.gaps[g]; t.classList.remove("on"); }
+      else { state.gaps[g] = 1; t.classList.add("on"); }
+      save();
+    } else if(t.closest && t.closest(".arrows") && t.tagName === "BUTTON"){
+      var lk = t.dataset.k, v = t.dataset.v;
+      var group = t.parentNode.querySelectorAll("button");
+      if(state.arrows[lk] === v){
+        delete state.arrows[lk];
+        group.forEach(function(b){ b.classList.remove("on"); });
+      } else {
+        state.arrows[lk] = v;
+        group.forEach(function(b){ b.classList.toggle("on", b.dataset.v === v); });
+      }
+      save();
+    }
+  });
+
+  /* ---------- fields ---------- */
+  var fields = Array.prototype.slice.call(document.querySelectorAll(".ans"));
+  fields.forEach(function(el, i){
+    var id = el.name && el.type === "radio" ? "r:" + el.name : "f:" + i;
+    el.dataset.key = id;
+
+    if(el.type === "checkbox"){
+      if(state.fields[id] === true) el.checked = true;
+    } else if(el.type === "radio"){
+      if(state.fields[id] === el.value) el.checked = true;
+    } else {
+      if(typeof state.fields[id] === "string") el.value = state.fields[id];
+    }
+
+    var handler = function(){
+      if(el.type === "checkbox") state.fields[id] = el.checked;
+      else if(el.type === "radio") state.fields[id] = el.value;
+      else state.fields[id] = el.value;
+      if(el.tagName === "TEXTAREA") grow(el);
+      save();
+    };
+    el.addEventListener("input", handler);
+    el.addEventListener("change", handler);
+    el.addEventListener("focus", function(){ lastField = el; });
+    if(el.tagName === "TEXTAREA") grow(el);
+  });
+
+  function grow(t){
+    t.style.height = "auto";
+    t.style.height = (t.scrollHeight + 2) + "px";
+  }
+  window.addEventListener("resize", function(){
+    document.querySelectorAll("textarea").forEach(grow);
+  });
+
+  /* ---------- symbol insert ---------- */
+  var lastField = null;
+  document.querySelectorAll(".toolbar .ins").forEach(function(btn){
+    btn.addEventListener("mousedown", function(e){ e.preventDefault(); });
+    btn.addEventListener("click", function(){
+      var sym = btn.dataset.sym;
+      var el = lastField;
+      if(!el || (el.tagName !== "TEXTAREA" && el.type !== "text")){
+        flash("Click in an answer box first");
+        return;
+      }
+      var s = el.selectionStart == null ? el.value.length : el.selectionStart;
+      var e2 = el.selectionEnd == null ? el.value.length : el.selectionEnd;
+      var ins = (sym === "/" ? " / " : " " + sym);
+      el.value = el.value.slice(0, s) + ins + el.value.slice(e2);
+      var pos = s + ins.length;
+      el.focus();
+      el.setSelectionRange(pos, pos);
+      state.fields[el.dataset.key] = el.value;
+      if(el.tagName === "TEXTAREA") grow(el);
+      save();
+    });
+  });
+
+  /* ---------- download ---------- */
+  document.getElementById("btn-download").addEventListener("click", function(){
+    var nameEl = document.getElementById("sname");
+    var who = (nameEl && nameEl.value.trim()) || "student";
+    var out = ["Unit 10 — Networking and Professional Events", "Answers by: " + who, ""];
+
+    fields.forEach(function(el){
+      var label = el.dataset.label || "";
+      if(el.type === "checkbox"){
+        out.push("[" + (el.checked ? "x" : " ") + "] " + label);
+      } else if(el.type === "radio"){
+        if(el.checked) out.push(label + ": " + el.value);
+      } else if(el.value.trim()){
+        out.push(label + ":");
+        out.push("  " + el.value.replace(/\n/g, "\n  "));
+        out.push("");
+      }
+    });
+
+    var marked = [];
+    SCRIPT1.forEach(function(row, li){
+      var toks = row[1].split(/\s+/).map(function(tok, wi){
+        var pre = state.gaps["a:" + li + ":" + wi] ? "/ " : "";
+        return pre + (state.words["a:" + li + ":" + wi] ? tok.toUpperCase() : tok);
+      });
+      var ar = state.arrows["a:" + li];
+      marked.push(row[0] + ": " + toks.join(" ") + (ar ? (ar === "up" ? " ↗" : " ↘") : ""));
+    });
+    out.push("", "My marking of the conversation:", "");
+    out = out.concat(marked);
+
+    var blob = new Blob([out.join("\n")], {type:"text/plain;charset=utf-8"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "unit10-" + who.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".txt";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+
+  /* ---------- print & reset ---------- */
+  document.getElementById("btn-print").addEventListener("click", function(){
+    document.querySelectorAll("textarea").forEach(grow);
+    window.print();
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", function(){
+    if(!window.confirm("Clear every answer on this worksheet? This cannot be undone.")) return;
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    window.location.reload();
+  });
+
+  window.addEventListener("beforeprint", function(){
+    document.querySelectorAll("textarea").forEach(grow);
+  });
+})();
+</script>
+</body>
+</html>
